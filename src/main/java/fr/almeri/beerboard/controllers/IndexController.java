@@ -48,16 +48,16 @@ public class IndexController {
         pModel.addAttribute("updated", dtf.format(LocalDateTime.now()));
 
         //brasserie par région
-        ArrayList<String> labelsPieChart = regionRepository.getNomRegion();
+        List<String> labelsPieChart = brasserieRepository.getLabelsNomRegion() ;
         ArrayList<Integer>  datasPieChart = brasserieRepository.getNbBrasserieRegion();
-        pModel.addAttribute("labelsPieChart", regionRepository.getNomRegion());
-        pModel.addAttribute("datasPieChart", brasserieRepository.getNbBrasserieRegion());
+        pModel.addAttribute("labelsPieChart", labelsPieChart);
+        pModel.addAttribute("datasPieChart", datasPieChart);
 
         //Nombre de bières par taux d'alcool
         ArrayList<Integer> labelsAreaChart = biereRepository.getNbBiereTaux();
         ArrayList<Integer> datasAreaChart = biereRepository.getNbTauxBiere();
-        pModel.addAttribute("labelsAreaChart",biereRepository.getNbTauxBiere() );
-        pModel.addAttribute("datasAreaChart",biereRepository.getNbBiereTaux());
+        pModel.addAttribute("labelsAreaChart",labelsAreaChart );
+        pModel.addAttribute("datasAreaChart",datasAreaChart);
 
 
         //Consommation & production en bières des pays
@@ -65,8 +65,8 @@ public class IndexController {
         ArrayList<Double> datasConsommation = paysRepository.getConsoPaysAsc();
         ArrayList<Double> datasProduction = paysRepository.getProdPaysAsc();
         pModel.addAttribute("labelsBarChart", labelsBarChart);
-        pModel.addAttribute("datasConsommation", paysRepository.getConsoPaysAsc());
-        pModel.addAttribute("datasProduction", paysRepository.getProdPaysAsc());
+        pModel.addAttribute("datasConsommation", datasConsommation);
+        pModel.addAttribute("datasProduction", datasProduction);
 
         //Nombre de marques référencés par brasseries
         ArrayList<String> labelsBarChart1 = brasserieRepository.getBrasserie();

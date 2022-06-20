@@ -9,10 +9,10 @@ import java.util.Objects;
 @Entity
 @Table(name="region")
 public class Region {
-    @Id
+
     @Column(name="nom_pays")
     private  String nomPays;
-
+    @Id
     @Column(name="nom_region")
     private  String nomRegion;
 
