@@ -12,7 +12,7 @@ public class Pays {
     //@Id : j'indique l'attribut avec la clé primaire
     //@Column je fais la liaison entre l'attribut et le nom de la colonne
     @Id
-    @Column(name ="nom-pays")
+    @Column(name ="nom_pays")
     private String nomPays;
     @Column(name="consommation")
     private Double consommation;

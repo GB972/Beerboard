@@ -10,9 +10,9 @@ import java.util.Objects;
 @Table(name = "brasserie")
 public class Brasserie {
     @Id
-    @Column(name="codeBrasserie")
+    @Column(name="code_brasserie")
     private String codeBrasserie;
-    @Column(name="nomBrasserie")
+    @Column(name="nom_brasserie")
     private String nomBrasserie;
     @Column(name="ville")
     private String ville;

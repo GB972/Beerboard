@@ -10,10 +10,10 @@ import java.util.Objects;
 public class Marque  {
 
     @Id
-    @Column(name="nomMarque")
+    @Column(name="nom_marque")
     private String nomMarque;
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="brasserie")
+    @JoinColumn(name="code_brasserie")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Brasserie brasserie;
 

@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 //Permet d'indiquer à Spring Boot qu'il y aura un "routage" dans ce fichier
 @Controller
@@ -29,6 +30,8 @@ public class ExempleControlleur {
     @Autowired
     private MarqueRepository marqueRepository;
 
+    @Autowired
+    private BiereRepository biereRepository;
 
     //permet de definir une route appelée avec la méthode GET("directement via l'URL")
     // Ici localhost:8888/example
@@ -65,7 +68,7 @@ public class ExempleControlleur {
         pays5.setNomPays("Belgique");
         pays5.setConsommation(996.4);
         pays5.setProduction(44.1);
-
+//
         ArrayList<Pays> listPays= new ArrayList<>();
         listPays.add(pays0);
         listPays.add(pays1);
@@ -84,14 +87,15 @@ public class ExempleControlleur {
         ArrayList<Region> listRegionFromDataBase = (ArrayList<Region>) regionRepository.findAll();
         pModel.addAttribute("listRegion",listRegionFromDataBase);
 
-        ArrayList<Brasserie> listBrasserieFromDataBase = (ArrayList<Brasserie>)brasserieRepository.findAll();
-        pModel.addAttribute("listBrasserie",listBrasserieFromDataBase);
 
         ArrayList<Marque> listMarqueFromDataBase = (ArrayList<Marque>)marqueRepository.findAll();
         pModel.addAttribute("listMarque",listMarqueFromDataBase);
 
         ArrayList<Type> listTypeFromDataBase = (ArrayList<Type>)typeRepository.findAll();
         pModel.addAttribute("listType",listTypeFromDataBase);
+
+        ArrayList<Biere>  bieres = (ArrayList<Biere>)biereRepository.findAll();
+        System.out.println();
 
         //Méthode permettant d'indiquer quelle page HTML on renvoie
         // ici example.html dans le repertoire template

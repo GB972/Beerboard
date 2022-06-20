@@ -10,10 +10,10 @@ import java.util.Objects;
 @Table(name="region")
 public class Region {
     @Id
-    @Column(name="nomPays")
+    @Column(name="nom_pays")
     private  String nomPays;
 
-    @Column(name="nomRegion")
+    @Column(name="nom_region")
     private  String nomRegion;
 
     public Region(){

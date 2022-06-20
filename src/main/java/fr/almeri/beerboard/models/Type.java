@@ -10,9 +10,9 @@ import java.util.Objects;
 @Table(name="type")
 public class Type {
     @Id
-    @Column(name="noType")
+    @Column(name="no_type")
     private Integer noType;
-    @Column(name="nomType")
+    @Column(name="nom_type")
     private String nomType;
     @Column(name="description")
     private String description;
