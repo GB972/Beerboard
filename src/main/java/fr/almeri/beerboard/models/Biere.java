@@ -27,8 +27,8 @@ public class Biere {
     private Double tauxAlcool;
     @Column(name="caracteristiques")
     private String caracteristiques;
-    @Column(name="noTypeStr")
-    private String noTypeStr;
+//    @Column(name="noTypeStr")
+//    private String noTypeStr;
 
     public Biere(){
 
@@ -82,24 +82,24 @@ public class Biere {
         this.caracteristiques = pCaracteristiques;
     }
 
-    public String getNoTypeStr() {
-        return noTypeStr;
-    }
-
-    public void setNoTypeStr(String pNoTypeStr) {
-        this.noTypeStr = pNoTypeStr;
-    }
+//    public String getNoTypeStr() {
+//        return noTypeStr;
+//    }
+//
+//    public void setNoTypeStr(String pNoTypeStr) {
+//        this.noTypeStr = pNoTypeStr;
+//    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Biere)) return false;
         Biere biere = (Biere) o;
-        return Objects.equals(marque, biere.marque) && Objects.equals(version, biere.version) && Objects.equals(type, biere.type) && Objects.equals(couleurBiere, biere.couleurBiere) && Objects.equals(tauxAlcool, biere.tauxAlcool) && Objects.equals(caracteristiques, biere.caracteristiques) && Objects.equals(noTypeStr, biere.noTypeStr);
+        return Objects.equals(marque, biere.marque) && Objects.equals(version, biere.version) && Objects.equals(type, biere.type) && Objects.equals(couleurBiere, biere.couleurBiere) && Objects.equals(tauxAlcool, biere.tauxAlcool) && Objects.equals(caracteristiques, biere.caracteristiques);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(marque, version, type, couleurBiere, tauxAlcool, caracteristiques, noTypeStr);
+        return Objects.hash(marque, version, type, couleurBiere, tauxAlcool, caracteristiques);
     }
 }

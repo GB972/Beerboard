@@ -26,4 +26,7 @@ public interface BiereRepository extends CrudRepository<Biere, BiereId$> {
     @Query("Select b.marque.nomMarque from Biere as b group by b.marque.nomMarque")
     public ArrayList<String> getNomMarque();
 
+    @Query("Select b from Biere as b where b.marque.brasserie.codeBrasserie = :code order by b.marque.nomMarque,b.version asc")
+    public ArrayList<Biere> getBiereBrasserie(String code);
+
 }
