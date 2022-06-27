@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <title>BRASSERIE</title>
+  <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+  <link th:href="@{~/css/styles.css}" rel="stylesheet" />
+  <link th:href="@{~/css/custom.css}" rel="stylesheet" />
+  <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+</head>
+<body class="sb-nav-fixed">
+
+<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+  <!-- Navbar Brand-->
+  <a class="navbar-brand ps-3" href="index.html">Brasserie</a>
+  <!-- Sidebar Toggle-->
+  <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+</nav>
+
+<div id="layoutSidenav">
+  <div th:insert="~{/left_bar}"></div>
+
+  <div id="layoutSidenav_content">
+    <main class="container-fluid">
+      <div class="container-fluid px-4">
+        <h1 class="mt-4">Bières</h1>
+        <ol class="breadcrumb mb-4">
+          <li class="breadcrumb-item"><a th:href="@{/}">Dashboard</a></li>
+          <li class="breadcrumb-item active">Détail d'une bière</li>
+        </ol>
+
+        <div class="card mb-4">
+          <div class="row">
+            <div class="col-6">
+              <div class="card-header">
+                <i class="fa-solid fa-beer-mug"></i>
+                Marque & Brasserie
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-1 mr-2">
+                    <img th:src="@{~/assets/img/beer.jpg}" width="80" height="80" >
+                  </div>
+                  <div class="col-11">
+                    <form class="">
+                      <div class="form-group row mb-2">
+                        <label for="nomMarque" class="col-sm-4 col-form-label">Nom de la marque</label>
+                        <div class="col-sm-8">
+                          <input th:value="${biere.marque.getNomMarque()}"  type="text" class="form-control" id="nomMarque" placeholder="Nom de la marque" readonly="readonly">
+                        </div>
+                      </div>
+                      <div class="form-group row mb-2">
+                        <label for="identifiant" class="col-sm-4 col-form-label">Identifiant de la brasserie</label>
+                        <div class="col-sm-8">
+                          <input th:value="${biere.marque.getBrasserie().getCodeBrasserie()}"  type="text" class="form-control" id="identifiant" placeholder="Identifiant brasserie" readonly="readonly">
+                        </div>
+                      </div>
+                      <div class="form-group row mb-2">
+                        <label for="nomBrasserie" class="col-sm-4 col-form-label">Nom de la brasserie</label>
+                        <div class="col-sm-8">
+                          <input th:value="${biere.marque.getBrasserie().getNomBrasserie()}" type="text" class="form-control" id="nomBrasserie" placeholder="Nom de la brasserie" readonly="readonly">
+                        </div>
+                      </div>
+                      <div class="form-group row mb-2">
+                        <label for="VilleBrasserie" class="col-sm-4 col-form-label">Ville</label>
+                        <div class="col-sm-8">
+                          <input th:value="${biere.marque.getBrasserie().getVille()}"  type="text" class="form-control" id="VilleBrasserie" placeholder="Ville de la brasserie" readonly="readonly">
+                        </div>
+                      </div>
+                      <div class="form-group row ">
+                        <label for="regionBrasserie" class="col-sm-4 col-form-label">Région</label>
+                        <div class="col-sm-8">
+                          <input th:value="${biere.marque.getBrasserie().getRegion().getNomRegion()}"  type="text" class="form-control" id="regionBrasserie" placeholder="Région de la brasserie" readonly="readonly">
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card-header">
+                <i class="fa-solid fa-beer-mug"></i>
+                Détails
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">
+                    <form class="">
+                      <div class="form-group row mb-2">
+                        <label for="version" class="col-sm-3 col-form-label">Version</label>
+                        <div class="col-sm-9">
+                          <input th:value="${biere.getVersion()}" type="text" class="form-control" id="version" placeholder="Version" readonly="readonly">
+                        </div>
+                      </div>
+                      <div class="form-group row mb-2">
+                        <label for="couleurBiere" class="col-sm-3 col-form-label">Couleur de la bière</label>
+                        <div class="col-sm-9">
+                          <input th:value="${biere.getCouleurBiere()}" type="text" class="form-control" id="couleurBiere" placeholder="Couleur bière" readonly="readonly">
+                        </div>
+                      </div>
+                      <div class="form-group row mb-2">
+                        <label for="tauxAlcool" class="col-sm-3 col-form-label">Taux d'alcool</label>
+                        <div class="col-sm-9">
+                          <input th:value="${biere.getTauxAlcool()}"  type="text" class="form-control" id="tauxAlcool" placeholder="Taux d'alcool" readonly="readonly">
+                        </div>
+                      </div>
+                      <div class="form-group row ">
+                        <label for="regionBrasserie" class="col-sm-3 col-form-label">Caractéristiques</label>
+                        <div class="col-sm-9">
+                          <textarea th:text="${biere.getCaracteristiques()}" class="form-control" rows="3" placeholder="Caractéristiques de la bière" readonly="readonly"></textarea>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card mb-4">
+          <div class="row">
+            <div class="card-header">
+              <i class="fa-solid fa-beer-mug"></i>
+              Type de bière
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <form class="">
+                    <div class="form-group row mb-2">
+                      <label for="typeBiere" class="col-sm-3 col-form-label">Type de bière</label>
+                      <div class="col-sm-9">
+                        <input th:value="${biere.getType().getNomType()}" type="text" class="form-control" id="typeBiere" placeholder="Type de bière" readonly="readonly">
+                      </div>
+                    </div>
+                    <div class="form-group row mb-2">
+                      <label for="description" class="col-sm-3 col-form-label">Description</label>
+                      <div class="col-sm-9">
+                        <input th:value="${biere.getType().getDescription()}" type="text" class="form-control" id="description" placeholder="Description" readonly="readonly">
+                      </div>
+                    </div>
+                    <div class="form-group row mb-2">
+                      <label for="fermentation" class="col-sm-3 col-form-label">Fermentation</label>
+                      <div class="col-sm-9">
+                        <input th:value="${biere.getType().getFermentation()}" type="text" class="form-control" id="fermentation" placeholder="Fermentation" readonly="readonly">
+                      </div>
+                    </div>
+                    <div class="form-group row ">
+                      <label for="commentaire" class="col-sm-3 col-form-label">Commentaire</label>
+                      <div class="col-sm-9">
+                        <textarea th:text="${biere.getType().getNomType()}" class="form-control" rows="3" id="commentaire" placeholder="Commentaire" readonly="readonly"></textarea>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <div th:insert="~{/footer}"></div>
+  </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+<script th:src="@{~/js/scripts.js}"></script>
+<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+<script th:src="@{~/js/datatables-simple-demo.js}"></script>
+</body>
+</html>

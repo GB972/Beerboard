@@ -1,41 +1,76 @@
 package fr.almeri.beerboard.models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-@Table(name="region")
-public class Region {
-
-    @Column(name="nom_pays")
-    private  String nomPays;
+@Table(name = "region")
+public class Region implements Serializable {
+    /**
+     * Entité
+     */
     @Id
-    @Column(name="nom_region")
-    private  String nomRegion;
+    @Column(name = "nom_region")
+    private String nomRegion;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "nom_pays")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private Pays nomPays;
 
-    public Region(){
+    public Region(){};
 
+    /**
+     *
+     * @param nomRegion
+     * @param nomPays
+     */
+    public Region(String nomRegion, Pays nomPays)
+    {
+        this.nomRegion = nomRegion;
+        this.nomPays = nomPays;
     }
 
+    /**
+     *
+     * @return String nomRegion
+     */
     public String getNomRegion() {
-        return nomRegion;
+        return this.nomRegion;
     }
 
-    public void setNomRegion(String pNomRegion) {
-        this.nomRegion = pNomRegion;
+    /**
+     *
+     * @param nomRegion
+     */
+    public void setNomRegion(String nomRegion) {
+        this.nomRegion = nomRegion;
     }
 
-
-    public String getNomPays() {
-        return nomPays;
+    /**
+     *
+     * @return Pays
+     */
+    public Pays getNomPays() {
+        return this.nomPays;
     }
 
+    /**
+     *
+     * @param nomPays
+     */
+    public void setNomPays(Pays nomPays) {
+        this.nomPays = nomPays;
+    }
 
-    public void setNomPays(String pNomPays) {
-        this.nomPays = pNomPays;
+    @Override
+    public String toString() {
+        return "Region{" +
+                "nomRegion='" + this.getNomRegion() + '\'' +
+                ", nomPays=" + this.getNomPays() +
+                '}';
     }
 
     @Override
@@ -43,16 +78,11 @@ public class Region {
         if (this == o) return true;
         if (!(o instanceof Region)) return false;
         Region region = (Region) o;
-        return Objects.equals(nomRegion, region.nomRegion) && Objects.equals(nomPays, region.nomPays);
+        return Objects.equals(getNomRegion(), region.getNomRegion()) && Objects.equals(getNomPays(), region.getNomPays());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(nomRegion, nomPays);
-    }
-
-    @Override
-    public String toString() {
-        return  nomRegion;
+        return Objects.hash(getNomRegion(), getNomPays());
     }
 }

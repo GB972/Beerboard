@@ -3,42 +3,68 @@ package fr.almeri.beerboard.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-@Table(name ="marque")
-public class Marque  {
+@Table(name = "marque")
+public class Marque implements Serializable {
 
+    /**
+     * Entité marque
+     */
     @Id
-    @Column(name="nom_marque")
+    @Column(name = "nom_marque")
     private String nomMarque;
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="code_brasserie")
+    @JoinColumn(name = "code_brasserie")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Brasserie brasserie;
 
-    public Marque(){
+    public Marque(){};
 
+    /**
+     * @param nomMarque
+     */
+    public Marque(String nomMarque)
+    {
+        this.nomMarque = nomMarque;
     }
 
-    public Marque(String pNomMarque){
-        this.nomMarque=pNomMarque;
-    }
-
+    /**
+     * @return String nomMarque
+     */
     public String getNomMarque() {
-        return nomMarque;
+        return this.nomMarque;
     }
 
-    public void setNomMarque(String pNomMarque) {
-        this.nomMarque = pNomMarque;
+    /**
+     * @param nomMarique
+     */
+    public void setNomMarque(String nomMarique) {
+        this.nomMarque = nomMarique;
     }
 
+    /**
+     * @return Brasserie
+     */
     public Brasserie getBrasserie() {
-        return brasserie;
+        return this.brasserie;
     }
 
-    public void setBrasserie(Brasserie pBrasserie) {
-        this.brasserie = pBrasserie;
+    /**
+     * @param brasserie
+     */
+    public void setBrasserie(Brasserie brasserie) {
+        this.brasserie = brasserie;
+    }
+
+    @Override
+    public String toString() {
+        return "Marque{" +
+                "nomMarique='" + this.getNomMarque() + '\'' +
+                ", brasserie=" + this.getBrasserie() +
+                '}';
     }
 
     @Override
@@ -46,16 +72,11 @@ public class Marque  {
         if (this == o) return true;
         if (!(o instanceof Marque)) return false;
         Marque marque = (Marque) o;
-        return Objects.equals(nomMarque, marque.nomMarque) && Objects.equals(brasserie, marque.brasserie);
+        return Objects.equals(getNomMarque(), marque.getNomMarque()) && Objects.equals(getBrasserie(), marque.getBrasserie());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(nomMarque, brasserie);
-    }
-
-    @Override
-    public String toString() {
-        return  nomMarque ;
+        return Objects.hash(getNomMarque(), getBrasserie());
     }
 }
