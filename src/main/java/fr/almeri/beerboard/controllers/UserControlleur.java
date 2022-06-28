@@ -3,6 +3,9 @@ package fr.almeri.beerboard.controllers;
 import fr.almeri.beerboard.models.User;
 import fr.almeri.beerboard.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -47,5 +50,12 @@ public class UserControlleur {
 
         String newPass = hashMD5withSalt(user.getPassword(),u.getSalt());
         return newPass.equals(u.getPassword());
+    }
+
+    @GetMapping("/profil")
+    public String profil(Model model, @PathVariable String login){
+
+
+        return "profil";
     }
 }
