@@ -11,6 +11,7 @@ public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="user_Id")
     private Integer userId;
 
     @Column(name="prenom_utilisateur")
@@ -30,9 +31,12 @@ public class User implements Serializable {
 
     public User(){};
 
-    public User(String login, String password) {
+    public User(String prenomUtilisateur, String nomUtilisateur,String login, String password, byte[] salt) {
+        this.prenomUtilisateur = prenomUtilisateur;
+        this.nomUtilisateur = nomUtilisateur;
         this.login = login;
         this.password = password;
+        this.salt = salt;
     }
 
     public Integer getUserId() {

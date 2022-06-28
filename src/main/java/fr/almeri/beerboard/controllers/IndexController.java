@@ -88,24 +88,5 @@ public class IndexController {
     }
 
 
-//    String pass = "pass";
-//    try
-//
-//    {
-//        byte[] salt =  getSalt();
-//        String hashPass = hashMD5withSalt(pass, salt);
-//        User u = new User("gboutin@beerboard.fr", hashPass, salt);
-//        userRepository.save(u);
-//    }
-//    catch(NoSuchAlgorithmException e)
-//
-//    {
-//        e.printStackTrace();
-//    }
-//    catch(
-//    NoSuchProviderException e)
-//
-//    {
-//        e.printStackTrace();
-//    }
+
 }

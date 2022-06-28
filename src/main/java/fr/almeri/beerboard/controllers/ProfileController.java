@@ -9,6 +9,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
+
+import static fr.almeri.beerboard.controllers.UserControlleur.getSalt;
+import static fr.almeri.beerboard.controllers.UserControlleur.hashMD5withSalt;
 
 @Controller
 public class ProfileController {
@@ -17,14 +22,35 @@ public class ProfileController {
     private UserRepository userRepository;
     @GetMapping("/")
     public String connexion(Model pModel) {
+//        String pass = "pass";
+//        try
+//
+//        {
+//            byte[] salt =  getSalt();
+//            String hashPass = hashMD5withSalt(pass, salt);
+//            User u = new User("Guillaume","Boutin","gboutin@beerboard.fr", hashPass, salt);
+//            userRepository.save(u);
+//        }
+//        catch(NoSuchAlgorithmException e)
+//
+//        {
+//            e.printStackTrace();
+//        }
+//        catch(
+//                NoSuchProviderException e)
+//
+//        {
+//            e.printStackTrace();
+//        }
         return "login";
     }
 
     @PostMapping("/connect-user")
-    public String connectUtilisateur(@ModelAttribute User user, @RequestParam String login, RedirectAttributes redir, HttpSession session) {
-        User userTest = userRepository.compteExistant(login);
+    public String connectUtilisateur(@ModelAttribute User user, RedirectAttributes redir, HttpSession session) {
+        User userTest = userRepository.compteExistant(user.getLogin());
         if (userTest != null) {
-            if (user.getPassword().equals(userTest.getPassword())) {
+            String hashmdp = hashMD5withSalt(user.getPassword(), userTest.getSalt());
+            if (hashmdp.equals(userTest.getPassword())) {
                 session.setAttribute("infoConnexion",userTest);
                 return "redirect:/index";
             }
