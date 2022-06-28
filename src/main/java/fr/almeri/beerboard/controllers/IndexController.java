@@ -1,5 +1,6 @@
 package fr.almeri.beerboard.controllers;
 
+import fr.almeri.beerboard.models.User;
 import fr.almeri.beerboard.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,9 +9,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+
+
 
 
 @Controller
@@ -31,8 +36,11 @@ public class IndexController {
     @Autowired
     private BiereRepository biereRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
     @GetMapping("/")
-    public String home(Model pModel, HttpSession pSession){
+    public String home(Model pModel, HttpSession pSession) {
         pModel.addAttribute("bieres", 328);
         pModel.addAttribute("brasseries", 99);
 
@@ -55,7 +63,7 @@ public class IndexController {
         ArrayList<Integer> datasConsommation = paysRepository.getListeConsommationPaysAsc();
         pModel.addAttribute("datasConsommation", datasConsommation);
         ArrayList<Integer> datasProduction = paysRepository.getListeProductionPaysAsc();
-        pModel.addAttribute("datasProduction",datasProduction);
+        pModel.addAttribute("datasProduction", datasProduction);
 
         pModel.addAttribute("labelsBarChart1", brasserieRepository.getListeNomBrasserieAsc());
         pModel.addAttribute("datasBarChart1", brasserieRepository.getNombreMarqueParBrasserieAsc());
@@ -67,7 +75,29 @@ public class IndexController {
     }
 
     @GetMapping("/logout")
-    public String logout(Model pModel, RedirectAttributes pRedirectAttributes, HttpSession pSession){
+    public String logout(Model pModel, RedirectAttributes pRedirectAttributes, HttpSession pSession) {
         return "redirect:/";
     }
+
+
+//    String pass = "pass";
+//    try
+//
+//    {
+//        byte[] salt =  getSalt();
+//        String hashPass = hashMD5withSalt(pass, salt);
+//        User u = new User("gboutin@beerboard.fr", hashPass, salt);
+//        userRepository.save(u);
+//    }
+//    catch(NoSuchAlgorithmException e)
+//
+//    {
+//        e.printStackTrace();
+//    }
+//    catch(
+//    NoSuchProviderException e)
+//
+//    {
+//        e.printStackTrace();
+//    }
 }

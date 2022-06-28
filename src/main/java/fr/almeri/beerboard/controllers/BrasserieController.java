@@ -17,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 
@@ -32,12 +33,6 @@ public class BrasserieController {
     @Autowired
     private BiereRepository biereRepository;
 
-    /**
-     * Affiche la liste des brasseries
-     * Tableau
-     * @param model
-     * @return
-     */
     @GetMapping("/breweries")
     public String listeBrasserie(Model model)
     {
@@ -48,13 +43,6 @@ public class BrasserieController {
         return "brasserie/index";
     }
 
-    /**
-     * Affiche la fiche détail d'une brasserie
-     * Ainsi que la liste des marques et Versions concernant une bière
-     * @param model
-     * @param code
-     * @return
-     */
     @GetMapping("/see-brewery/{code}")
     public String detailBrasserie(Model model, @PathVariable String code)
     {
@@ -70,28 +58,16 @@ public class BrasserieController {
 
     }
 
-    /**
-     * Affiche le formulaire vierge pour l'ajout d'une brasserie
-     * @param model
-     * @return
-     */
     @GetMapping("/add-brewery")
     public String ajouterBrasserieForm(Model model)
     {
         model.addAttribute("update", false);
         model.addAttribute("brasserie", new Brasserie());
-        // regionRepository.getListeNomRegionObjAsc() retourne la liste des régions
         model.addAttribute("listeRegion", regionRepository.getListeNomRegionObjAsc());
 
         return "brasserie/ajouter";
     }
 
-    /**
-     * Traitement des données formulaire ajout/modification
-     * @param brasserie
-     * @param model
-     * @return
-     */
     @PostMapping("/add-brewery")
     public String ajouterBrasserie (@Validated @ModelAttribute Brasserie brasserie, Model model)
     {
@@ -101,13 +77,6 @@ public class BrasserieController {
         return "redirect:/breweries";
     }
 
-    /**
-     * Affiche le formulaire en modification en incluant
-     * les données d'une brasserie
-     * @param model
-     * @param code
-     * @return
-     */
     @GetMapping("/update-brewery/{code}")
     public String modifierBrasserieForm(Model model,@PathVariable String code)
     {
@@ -116,5 +85,39 @@ public class BrasserieController {
         model.addAttribute("listeRegion", regionRepository.getListeNomRegionObjAsc());
 
         return "brasserie/ajouter";
+    }
+
+    @PostMapping("/valid-brewery")
+    public String addNouvelleBrasserie(@ModelAttribute Brasserie brasserie, RedirectAttributes redir){
+        if (!brasserieRepository.existsById(brasserie.getCodeBrasserie())){
+            brasserieRepository.save(brasserie);
+            return "redirect:/breweries";
+        } else{
+            redir.addFlashAttribute("msg", "L'identifiant de la brasserie existe déjà, veuillez en saisir un nouveau ou vérifier que cette brasserie n'existe pas déjà.");
+            return "redirect:/add-brewery";
+        }
+    }
+
+    @PostMapping("/update-brewery")
+    public String updateBrasserie(@ModelAttribute Brasserie brasserie){
+        brasserieRepository.save(brasserie);
+        return "redirect:/breweries";
+    }
+
+    @PostMapping("/drop-brewery")
+    public String deleteBrasserie(@ModelAttribute Brasserie brasserie, Model pModel, RedirectAttributes redir){
+
+        ArrayList<Biere> bieres = biereRepository.getListeMarquesVersions(brasserie.getCodeBrasserie());
+        pModel.addAttribute("bieres", bieres);
+
+        boolean existance = bieres.isEmpty();
+
+        if (existance) {
+            brasserieRepository.deleteById(brasserie.getCodeBrasserie());
+            return "redirect:/breweries";
+        } else {
+            redir.addFlashAttribute("msg","La brasserie ne peut être supprimée car des bières lui sont encore associées.");
+            return "redirect:/delete-brewery/" + brasserie.getCodeBrasserie();
+        }
     }
 }

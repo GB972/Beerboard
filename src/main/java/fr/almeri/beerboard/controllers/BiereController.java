@@ -39,7 +39,6 @@ public class BiereController {
 
     @GetMapping("/beers")
     public String listeBieres(Model model) {
-        // On récupère l'ensemble des bières de la base de données
         ArrayList<Biere> listBieresFromDatabase = (ArrayList<Biere>) biereRepository.findAll();
 
         model.addAttribute("listBieres", listBieresFromDatabase);
@@ -50,14 +49,12 @@ public class BiereController {
 
     @GetMapping("/see-beer/{marque}/{version}")
     public String detailBiere(Model model, @PathVariable String marque, @PathVariable String version) {
-        // Id bière
         BiereId idBiere = new BiereId(new Marque(marque), version);
 
-        // Obj Bière
         Biere biere = biereRepository.findById(idBiere).orElseThrow();
         model.addAttribute("biere", biere);
 
-        return "bieres/detail";
+        return "biere/detail";
 
     }
 
@@ -69,7 +66,7 @@ public class BiereController {
         model.addAttribute("listeType", typeRepository.findAll());
         model.addAttribute("listeMarque", marqueRepository.findAll());
 
-        return "bieres/ajouter";
+        return "biere/ajouter";
     }
 
 
@@ -77,7 +74,7 @@ public class BiereController {
     public String ajouterBiere(@Validated @ModelAttribute Biere biere, Model model) {
 
 
-        biereRepository.save(biere);
+            biereRepository.save(biere);
 
         return "redirect:/beers";
     }
@@ -87,7 +84,6 @@ public class BiereController {
     public String modifierBrasserieForm(Model model, @PathVariable String marque, @PathVariable String version) {
 
         BiereId idBiere = new BiereId(new Marque(marque), version);
-
         model.addAttribute("update", true);
         model.addAttribute("biere", biereRepository.findById(idBiere));
         model.addAttribute("listeType", typeRepository.findAll());
@@ -97,7 +93,7 @@ public class BiereController {
     }
 
     @PostMapping("/valid-beer")
-    public String addNouvelleBiere(@ModelAttribute Biere biere, RedirectAttributes redir) {
+    public String addNouvelleBiere(@ModelAttribute Biere biere, RedirectAttributes redir){
         BiereId id = new BiereId(biere.getMarque(), biere.getVersion());
         if (!biereRepository.existsById(id)) {
             biereRepository.save(biere);
@@ -109,7 +105,7 @@ public class BiereController {
     }
 
     @PostMapping("/update-beer")
-    public String updateBiere(@ModelAttribute Biere biere) {
+    public String updateBiere(@ModelAttribute Biere biere){
         BiereId id = new BiereId(biere.getMarque(), biere.getVersion());
         Biere oldBiere = biereRepository.findById(id).orElseThrow();
         biere.setType(oldBiere.getType());
@@ -118,7 +114,7 @@ public class BiereController {
     }
 
     @PostMapping("/drop-beer")
-    public String deleteBiere(@ModelAttribute Biere biere) {
+    public String deleteBiere(@ModelAttribute Biere biere){
         biereRepository.deleteById(new BiereId(biere.getMarque(), biere.getVersion()));
         return "redirect:/beers";
     }

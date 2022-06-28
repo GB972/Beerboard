@@ -95,8 +95,8 @@
                                         <span th:text="${biere.getCaracteristiques}"></span>
                                     </td>
                                     <td>
-                                        <a th:href="@{'/see-beer/'+ ${biere.getMarque()}}">
-                                        <i class="iconify" data-icon="noto:beer-mug"></i></a>
+                                        <a th:href="@{'/see-beer/'+ ${biere.getMarque()}+${biere.getVersion()}}">
+                                        <i class="iconify" data-icon="emojione:eye"></i></a>
                                     </td>
 
                                 </tr>

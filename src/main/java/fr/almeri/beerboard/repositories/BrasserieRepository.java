@@ -19,4 +19,6 @@ public interface BrasserieRepository extends CrudRepository<Brasserie, String> {
     @Query("select COUNT(marque.brasserie.codeBrasserie) from Brasserie brasserie, Marque marque WHERE brasserie.codeBrasserie = marque.brasserie.codeBrasserie group by marque.brasserie.codeBrasserie ORDER BY marque.brasserie.codeBrasserie ASC")
     public ArrayList<Integer> getNombreMarqueParBrasserieAsc();
 
+
+
 }
