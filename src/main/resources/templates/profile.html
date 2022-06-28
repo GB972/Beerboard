@@ -15,7 +15,7 @@
 <body class="sb-nav-fixed">
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
     <!-- Navbar Brand-->
-    <a class="navbar-brand ps-3" th:href="@{/}">Brasserie</a>
+    <a class="navbar-brand ps-3" th:href="@{/index}">Brasserie</a>
     <!-- Sidebar Toggle-->
     <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i
             class="fas fa-bars"></i></button>
@@ -47,14 +47,14 @@
                                             <label for="email" class="col-4">
                                                 Email
                                             </label>
-                                            <input disabled id="email" class="col-8" th:value="${session.email}">
+                                            <input disabled id="email" class="col-8" th:value="${session.user.login}">
                                         </div>
                                         <div class="row input-form">
                                             <label for="pass" class="col-4">
                                                 Mot de passe
                                             </label>
                                             <input disabled id="pass" type="password" class="col-8"
-                                                   th:value="${session.pass}">
+                                                   th:value="${session.password}">
                                         </div>
                                     </div>
                                 </div>
