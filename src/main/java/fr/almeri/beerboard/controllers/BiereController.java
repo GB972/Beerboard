@@ -16,7 +16,6 @@ import fr.almeri.beerboard.repositories.TypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -46,66 +45,59 @@ public class BiereController {
     }
 
 
-    @GetMapping("/see-beer/{marque}/{version}")
+    @GetMapping("/beer")
     public String detailBiere(Model model, @PathVariable String marque, @PathVariable String version, HttpSession session) {
         BiereId idBiere = new BiereId(new Marque(marque), version);
         Biere biere = biereRepository.findById(idBiere).orElseThrow();
         model.addAttribute("biere", biere);
         if (session.getAttribute("infoConnexion") != null) {
-            return "see-beer";
+            return "beer";
         }
         return "redirect:/";
 
     }
 
 
-    @GetMapping("/add-beer")
-    public String ajouterBiereForm(Model model, HttpSession session) {
-        ArrayList<Marque> listMarque = (ArrayList<Marque>) marqueRepository.findAll();
-        model.addAttribute("listMarque", listMarque);
-        ArrayList<Type> listType = (ArrayList<Type>) typeRepository.findAll();
-        model.addAttribute("listType", listType);
-        if (session.getAttribute("infoConnexion") != null) {
-            return "add-beer";
-        }
-        return "redirect:/";
-    }
+    @GetMapping("/ajouterBeer")
+    public String ajouterBiereForm(Model model, @PathVariable (required = false) String marque , @PathVariable (required = false) String version, HttpSession session) {
 
-
-    @GetMapping("/update-beer/{marque}/{version}")
-    public String modifierBrasserieForm(Model model, @PathVariable String marque, @PathVariable String version, HttpSession session) {
-
-        BiereId idBiere = new BiereId(new Marque(marque), version);
-        model.addAttribute("biere", biereRepository.findById(idBiere).orElseThrow());
-        if (session.getAttribute("infoConnexion") != null) {
-            return "modify-beer";
-        }
-        return "redirect:/";
-    }
-
-    @PostMapping("/valid-beer")
-    public String addNouvelleBiere(@ModelAttribute Biere biere, HttpSession session, RedirectAttributes redir) {
-        BiereId id = new BiereId(biere.getMarque(), biere.getVersion());
-        if (session.getAttribute("infoConnexion") != null) {
-            if (!biereRepository.existsById(id)) {
-                biereRepository.save(biere);
-                return "redirect:/beers";
-            } else {
-                redir.addFlashAttribute("msg", "Une bière de cette marque avec cette version existe déjà, veuillez saisir une nouvelle version.");
-                return "redirect:/add-beer";
+        if (marque == null && version == null) {
+            model.addAttribute("update",false);
+            ArrayList<Marque> listMarque = (ArrayList<Marque>) marqueRepository.findAll();
+            model.addAttribute("listMarque", listMarque);
+            ArrayList<Type> listType = (ArrayList<Type>) typeRepository.findAll();
+            model.addAttribute("listType", listType);
+            if (session.getAttribute("infoConnexion") != null) {
+                return "ajouterBeer";
+            }
+        } else {
+            model.addAttribute("update",true);
+            BiereId idBiere = new BiereId(new Marque(marque), version);
+            model.addAttribute("biere", biereRepository.findById(idBiere).orElseThrow());
+            if (session.getAttribute("infoConnexion") != null) {
+                return "ajouterBeer";
             }
         }
         return "redirect:/";
     }
 
-    @PostMapping("/update-beer")
-    public String updateBiere(@ModelAttribute Biere biere, HttpSession session) {
-        BiereId id = new BiereId(biere.getMarque(), biere.getVersion());
-        Biere oldBiere = biereRepository.findById(id).orElseThrow();
-        biere.setType(oldBiere.getType());
-        biereRepository.save(biere);
-        if (session.getAttribute("infoConnexion") != null) {
-            return "redirect:/beers";
+
+    @PostMapping("/valid-beer")
+    public String addNouvelleBiere(@ModelAttribute Biere biere, HttpSession session, RedirectAttributes redir, String update) {
+        if (update.equals("false")) {
+            BiereId id = new BiereId(biere.getMarque(), biere.getVersion());
+            if (session.getAttribute("infoConnexion") != null) {
+                if (!biereRepository.existsById(id)) {
+                    biereRepository.save(biere);
+                    return "redirect:/beers";
+                } else {
+                    redir.addFlashAttribute("msg", "Une bière de cette marque avec cette version existe déjà, veuillez saisir une nouvelle version.");
+                    return "redirect:/add-beer";
+                }
+            }
+        } else{
+            biereRepository.save(biere);
+            return "redirect:/";
         }
         return "redirect:/";
     }
