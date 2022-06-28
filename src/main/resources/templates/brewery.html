@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="fr" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
     <title>BRASSERIE</title>
-    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
-    <link th:href="@{~/css/styles.css}" rel="stylesheet" />
-    <link th:href="@{~/css/custom.css}" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet"/>
+    <link th:href="@{~/css/styles.css}" rel="stylesheet"/>
+    <link th:href="@{~/css/custom.css}" rel="stylesheet"/>
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 </head>
 <body class="sb-nav-fixed">
@@ -18,7 +18,8 @@
     <!-- Navbar Brand-->
     <a class="navbar-brand ps-3" th:href="@{/}">Brasserie</a>
     <!-- Sidebar Toggle-->
-    <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+    <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i
+            class="fas fa-bars"></i></button>
 </nav>
 
 <div id="layoutSidenav">
@@ -42,32 +43,41 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-2">
-                                <img th:src="@{~/assets/img/beer.jpg}" width="200" height="200" >
+                                <img th:src="@{~/assets/img/beer.jpg}" width="200" height="200">
                             </div>
                             <div class="col-10">
                                 <form class="">
                                     <div class="form-group row mb-2">
-                                        <label for="indentifiant" class="col-sm-2 col-form-label">Identifiant de la brasserie</label>
+                                        <label for="indentifiant" class="col-sm-2 col-form-label">Identifiant de la
+                                            brasserie</label>
                                         <div class="col-sm-10">
-                                            <input th:value="${brasserie.getCodeBrasserie()}" type="text" class="form-control" id="indentifiant" placeholder="Identifiant" disabled>
+                                            <input th:value="${brasserie.getCodeBrasserie()}" type="text"
+                                                   class="form-control" id="indentifiant" placeholder="Identifiant"
+                                                   disabled>
                                         </div>
                                     </div>
                                     <div class="form-group row mb-2">
-                                        <label for="nomBrasserie" class="col-sm-2 col-form-label">Nom de la brasserie</label>
+                                        <label for="nomBrasserie" class="col-sm-2 col-form-label">Nom de la
+                                            brasserie</label>
                                         <div class="col-sm-10">
-                                            <input th:value="${brasserie.getNomBrasserie()}" type="text" class="form-control" id="nomBrasserie" placeholder="Nom de la brasserie" disabled>
+                                            <input th:value="${brasserie.getNomBrasserie()}" type="text"
+                                                   class="form-control" id="nomBrasserie"
+                                                   placeholder="Nom de la brasserie" disabled>
                                         </div>
                                     </div>
                                     <div class="form-group row mb-2">
                                         <label for="VilleBrasserie" class="col-sm-2 col-form-label">Ville</label>
                                         <div class="col-sm-10">
-                                            <input th:value="${brasserie.getVille()}" type="text" class="form-control" id="VilleBrasserie" placeholder="Ville de la brasserie" disabled>
+                                            <input th:value="${brasserie.getVille()}" type="text" class="form-control"
+                                                   id="VilleBrasserie" placeholder="Ville de la brasserie" disabled>
                                         </div>
                                     </div>
                                     <div class="form-group row ">
                                         <label for="regionBrasserie" class="col-sm-2 col-form-label">Région</label>
                                         <div class="col-sm-10">
-                                            <input th:value="${brasserie.getRegion().getNomRegion()}" type="text" class="form-control" id="regionBrasserie" placeholder="Région de la brasserie" disabled>
+                                            <input th:value="${brasserie.getRegion().getNomRegion()}" type="text"
+                                                   class="form-control" id="regionBrasserie"
+                                                   placeholder="Région de la brasserie" disabled>
                                         </div>
                                     </div>
                                 </form>
@@ -106,7 +116,8 @@
 
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
 <script th:src="@{~/js/scripts.js}"></script>
 <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
 <script th:src="@{~/js/datatables-simple-demo.js}"></script>

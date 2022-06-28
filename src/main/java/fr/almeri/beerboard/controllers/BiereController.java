@@ -54,7 +54,7 @@ public class BiereController {
         Biere biere = biereRepository.findById(idBiere).orElseThrow();
         model.addAttribute("biere", biere);
 
-        return "biere/detail";
+        return "bieres/detail";
 
     }
 
@@ -66,7 +66,7 @@ public class BiereController {
         model.addAttribute("listeType", typeRepository.findAll());
         model.addAttribute("listeMarque", marqueRepository.findAll());
 
-        return "biere/ajouter";
+        return "bieres/ajouter";
     }
 
 

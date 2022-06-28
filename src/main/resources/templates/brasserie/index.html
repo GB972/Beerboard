@@ -1,89 +1,125 @@
 <!DOCTYPE html>
 <html lang="fr" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <meta name="description" content="" />
-  <meta name="author" content="" />
-  <title>BRASSERIE</title>
-  <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
-  <link href="css/styles.css" rel="stylesheet" />
-  <link href="css/custom.css" rel="stylesheet" />
-  <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <meta name="description" content=""/>
+        <meta name="author" content=""/>
+        <title>BRASSERIES</title>
+        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet"/>
+        <link href="css/styles.css" rel="stylesheet"/>
+        <link href="css/custom.css" rel="stylesheet"/>
+        <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+    </head>
 </head>
 <body class="sb-nav-fixed">
-
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-  <!-- Navbar Brand-->
-  <a class="navbar-brand ps-3" th:href="@{/}">Brasserie</a>
-  <!-- Sidebar Toggle-->
-  <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+
+    <!-- Navbar Brand-->
+    <a class="navbar-brand ps-3" th:href="@{/}">Brasserie</a>
+
+    <!-- Sidebar Toggle-->
+    <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i
+            class="fas fa-bars"></i></button>
+
 </nav>
 
 <div id="layoutSidenav">
-  <div th:insert="~{/left_bar}"></div>
+    <!-- J'integre dans mon HTML ma page left_bar.html-->
+    <div th:insert="~{/left_bar}"></div>
+    <div id="layoutSidenav_content">
 
-  <div id="layoutSidenav_content">
-    <main class="container-fluid">
-      <div class="container-fluid px-4">
-        <h1 class="mt-4">Brasserie</h1>
-        <ol class="breadcrumb mb-4">
-          <li class="breadcrumb-item"><a th:href="@{/}">Dashboard</a></li>
-          <li class="breadcrumb-item active">Liste brasseries</li>
-        </ol>
-        <div class="card mb-4">
-        </div>
-        <div class="card mb-4">
-          <div class="card-header">
-            <i class="fas fa-table me-1"></i>
-            Liste des brasseries
-          </div>
-          <div class="card-body">
-            <table id="datatablesSimple">
-              <thead>
-              <tr>
-                <th>Identifiant</th>
-                <th>Nom</th>
-                <th>Ville</th>
-                <th>Région</th>
-                <th></th>
-              </tr>
-              </thead>
-              <tfoot>
-              <tr>
-                <th>Identifiant</th>
-                <th>Nom</th>
-                <th>Ville</th>
-                <th>Région</th>
-                <th></th>
-              </tr>
-              </tfoot>
-              <tbody>
-              <tr th:each="brasserie : ${listBrasserie}">
-                <td th:text="${brasserie.getCodeBrasserie()}"></td>
-                <td th:text="${brasserie.getNomBrasserie()}"></td>
-                <td th:text="${brasserie.getVille()}"></td>
-                <td th:text="${brasserie.getRegion().getNomRegion()}"></td>
-                <td>
-                  <a th:href="@{/see-brewery/{code}(code=${brasserie.getCodeBrasserie()})}"><i class="fa-solid fa-eye"></i></a>
-                  <a th:href="@{/update-brewery/{code}(code=${brasserie.getCodeBrasserie()})}"><i class="fa-solid fa-pen-to-square"></i></a>
-                </td>
-              </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </main>
-    <div th:insert="~{/footer}"></div>
-  </div>
+        <main>
+            <div class="container-fluid px-4">
+
+                <div class="row">
+                    <!-- j'affiche du texte dynamique dans ma page-->
+                    <!-- je dois utiliser la balise th:text-->
+                    <!-- pour recuperer ma variable, ${variable}-->
+                    <!-- pour concaténer du texte, il faut encadrer le texte statique par -->
+                    <!-- de simple cote et mettre un + avant la variable-->
+                    <!--                    <span th:text="'Bonjour '+${prenom}"></span><br></br>-->
+
+                    <br>
+                    <h3>Liste des Brasseries</h3>
+                    <br>
+                    <br></br>
+                    <!-- On affiche la liste des pays dans un tableau -->
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <i class="fas fa-table me-1"></i>
+                            Tableau des brasseries
+                        </div>
+                        <div class="card-body">
+                            <table id="datatablesSimple">
+                                <thead>
+                                <th>
+                                    <strong><i>Identifiant</i></strong>
+                                </th>
+                                <th>
+                                    <strong>Nom</strong>
+                                </th>
+                                <th>
+                                    <strong>Ville</strong>
+                                </th>
+                                <th>
+                                    <strong>Région</strong>
+                                </th>
+                                <th><strong>Voir</strong></th>
+                                <th><strong>Modifier</strong></th>
+                                <th><strong>Supprimer</strong></th>
+                                </thead>
+                                <tr th:each="brasserie:${listBrasserie}">
+                                    <td>
+                                        <span th:text="${brasserie.getCodeBrasserie}"></span>
+                                    </td>
+                                    <td>
+                                        <span th:text="${brasserie.getNomBrasserie }"></span>
+                                    </td>
+                                    <td>
+                                        <span th:text="${brasserie.getVille}"></span>
+                                    </td>
+                                    <td>
+                                        <span th:text="${brasserie.getRegion.getNomRegion()}"></span>
+                                    </td>
+                                    <td>
+                                        <a th:href="@{'/see-brewery/'+ ${brasserie.getCodeBrasserie()}}">
+                                            <i class="fa-solid fa-eye"></i>></a>
+                                    </td>
+                                    <td>
+                                        <a th:href="@{'/update-brewery/'+ ${brasserie.getCodeBrasserie()}}">
+                                            <i class="fa-solid fa-pen-to-square"></i>></a>
+                                    </td>
+                                    <td>
+                                        <a th:href="@{'/drop-brewery/'+ ${brasserie.getCodeBrasserie()}}">
+                                            <i class="fas fa-trash-alt"></i>></a>
+                                    </td>
+
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+
+        <!-- J'integre dans mon HTML mon footer-->
+        <div th:insert="~{/footer}"></div>
+    </div>
 
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+<!-- J'integre mes JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
 <script src="js/scripts.js"></script>
+
+<!-- Je n'oublie pas les scripts qui gèrent l'affichage des tableaux -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
 <script src="js/datatables-simple-demo.js"></script>
+<script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
 </body>
 </html>

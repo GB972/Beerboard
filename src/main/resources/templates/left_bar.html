@@ -11,25 +11,35 @@
             <div class="nav">
                 <div class="sb-sidenav-menu-heading">GENERAL</div>
                 <a class="nav-link" th:href="@{/}">
-                    <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                    <div class="sb-nav-link-icon"><i class="fas fa-chalkboard-teacher"></i></i></div>
                     Dashboard
                 </a>
-                <a class="nav-link" th:href="@{/profil}">
+                <a class="nav-link" th:href="@{/profile}">
                     <div class="sb-nav-link-icon"><i class="fas fa-user-alt"></i></div>
-                    Profil
+                    Profile
                 </a>
                 <div class="sb-sidenav-menu-heading">DETAILS</div>
 
                 <div class="sb-sidenav-menu-heading">ADMINISTRATION</div>
 
-                <div class="sb-sidenav-menu-heading">Bières et brasseries</div>
+                <div class="sb-sidenav-menu-heading">BIERES </div>
                 <a class="nav-link" th:href="@{/beers}">
-                    <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                    Bières
+                    <div class="sb-nav-link-icon"><i class="fas fa-table"></i></i></div>
+                    liste des bières
                 </a>
+                <a class="nav-link" th:href="@{/add-beer}">
+                    <div class="sb-nav-link-icon"><i class="fas fa-plus"></i></i></div>
+                    Ajout bière
+                </a>
+                <div class="sb-sidenav-menu-heading">BRASSERIES </div>
+
                 <a class="nav-link" th:href="@{/breweries}">
-                    <div class="sb-nav-link-icon"><i class="fas fa-user-alt"></i></div>
-                    Brasseries
+                    <div class="sb-nav-link-icon"><i class="fas fa-table"></i></i></div>
+                    liste des brasseries
+                </a>
+                <a class="nav-link" th:href="@{/add-brewery}">
+                    <div class="sb-nav-link-icon"><i class="fas fa-plus"></i></i></div>
+                    Ajout brasserie
                 </a>
             </div>
         </div>

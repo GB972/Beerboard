@@ -1,10 +1,8 @@
 package fr.almeri.beerboard.models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Objects;
 
 @Entity
@@ -12,8 +10,14 @@ import java.util.Objects;
 public class User implements Serializable {
 
     @Id
-    @Column(name = "user_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer userId;
+
+    @Column(name="prenom_utilisateur")
+    private String prenomUtilisateur;
+
+    @Column(name="nom_utilisateur")
+    private String nomUtilisateur;
 
     @Column(name = "login")
     private String login;
@@ -37,6 +41,22 @@ public class User implements Serializable {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+
+    public String getPrenomUtilisateur() {
+        return prenomUtilisateur;
+    }
+
+    public void setPrenomUtilisateur(String pPrenomUtilisateur) {
+        this.prenomUtilisateur = pPrenomUtilisateur;
+    }
+
+    public String getNomUtilisateur() {
+        return nomUtilisateur;
+    }
+
+    public void setNomUtilisateur(String pNomUtilisateur) {
+        this.nomUtilisateur = pNomUtilisateur;
     }
 
     public String getLogin() {
@@ -74,5 +94,17 @@ public class User implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(getUserId(), getLogin(), getPassword());
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", prenomUtilisateur='" + prenomUtilisateur + '\'' +
+                ", nomUtilisateur='" + nomUtilisateur + '\'' +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                ", salt=" + Arrays.toString(salt) +
+                '}';
     }
 }

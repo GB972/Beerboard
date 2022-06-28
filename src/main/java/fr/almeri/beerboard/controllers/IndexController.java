@@ -36,10 +36,9 @@ public class IndexController {
     @Autowired
     private BiereRepository biereRepository;
 
-    @Autowired
-    private UserRepository userRepository;
 
-    @GetMapping("/")
+
+    @GetMapping("/index")
     public String home(Model pModel, HttpSession pSession) {
         pModel.addAttribute("bieres", 328);
         pModel.addAttribute("brasseries", 99);
@@ -76,6 +75,15 @@ public class IndexController {
 
     @GetMapping("/logout")
     public String logout(Model pModel, RedirectAttributes pRedirectAttributes, HttpSession pSession) {
+        pSession.invalidate();
+        return "redirect:/";
+    }
+
+    @GetMapping("/profile")
+    public String profile(Model pModel, RedirectAttributes pRedirectAttributes, HttpSession session) {
+        if (session.getAttribute("infoConnexion") != null) {
+            return "profile";
+        }
         return "redirect:/";
     }
 
