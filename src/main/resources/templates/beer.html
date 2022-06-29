@@ -48,32 +48,32 @@
                                                 <input class="form-control"
                                                        type="text"
                                                        name="reference"
-                                                       th:value="${biere.getMarque().getNomMarque()}"
+                                                       th:value="*{biere.getMarque().getNomMarque()}"
                                                        readonly>
                                             </div>
                                             <div class="form-group">
                                                 <label class="form-control-label"> Identifiant de la brasserie
                                                     : </label>
                                                 <input class="form-control" type="text" name="identifiant"
-                                                       th:value="${biere.getMarque().getBrasserie().getCodeBrasserie()}"
+                                                       th:value="*{biere.getMarque().getBrasserie().getCodeBrasserie()}"
                                                        readonly>
                                             </div>
                                             <div class="form-group">
                                                 <label class="form-control-label"> Nom de la brasserie : </label>
                                                 <input class="form-control" type="texte" name="nom"
-                                                       th:value="${biere.getMarque().getBrasserie().getNomBrasserie()}"
+                                                       th:value="*{biere.getMarque().getBrasserie().getNomBrasserie()}"
                                                        readonly>
                                             </div>
                                             <div class="form-group">
                                                 <label class="form-control-label"> Ville : </label>
                                                 <input class="form-control" type="text" name="ville"
-                                                       th:value="${biere.getMarque().getBrasserie().getVille()}"
+                                                       th:value="*{biere.getMarque().getBrasserie().getVille()}"
                                                        readonly>
                                             </div>
                                             <div class="form-group">
                                                 <label class="form-control-label"> Région : </label>
                                                 <input class="form-control" type="text" name="région"
-                                                       th:value="${biere.getMarque().getBrasserie().getRegion().getNomRegion()} + '-' + ${biere.getMarque().getBrasserie().getRegion().getNomPays()}"
+                                                       th:value="*{biere.getMarque().getBrasserie().getRegion().getNomRegion()} + '-' + *{biere.getMarque().getBrasserie().getRegion().getNomPays()}"
                                                        readonly>
                                             </div>
                                         </div>
@@ -86,26 +86,26 @@
                                             <div class="form-group">
                                                 <label class="form-control-label"> Version : </label>
                                                 <input class="form-control" type="text" name="version"
-                                                       th:value="${biere.getVersion()}"
+                                                       th:value="*{biere.getVersion()}"
                                                        readonly>
                                             </div>
                                             <div class="form-group">
                                                 <label class="form-control-label"> Couleur de la bière
                                                     : </label>
                                                 <input class="form-control" type="text" name="couleur"
-                                                       th:value="${biere.getCouleurBiere()}"
+                                                       th:value="*{biere.getCouleurBiere()}"
                                                        readonly>
                                             </div>
                                             <div class="form-group">
                                                 <label class="form-control-label"> Taux d'alcool </label>
                                                 <input class="form-control" name="tauxAlccol"
-                                                       th:value="${biere.getTauxAlcool()} != null ? ${biere.getTauxAlcool()}+' %' : '0.0 %'"
+                                                       th:value="*{biere.getTauxAlcool()} != null ? *{biere.getTauxAlcool()}+' %' : '0.0 %'"
                                                        readonly>
                                             </div>
                                             <div class="form-group">
                                                 <label class="form-control-label"> Caractéristiques : </label>
                                                 <input class="form-control" name="caracteristiques"
-                                                       th:value="${biere.getCaracteristiques()} != null ? ${biere.getCaracteristiques()} : 'Pas de caractéristique'"
+                                                       th:value="*{biere.getCaracteristiques()} != null ? *{biere.getCaracteristiques()} : 'Pas de caractéristique'"
                                                        readonly>
                                             </div>
                                         </div>
@@ -118,26 +118,26 @@
                                             <div class="form-group">
                                                 <label class="form-control-label"> Type de bière : </label>
                                                 <input class="form-control" type="text" name="type"
-                                                       th:value="${biere.getType().getNomType()}"
+                                                       th:value="*{biere.getType().getNomType()}"
                                                        readonly>
                                             </div>
                                             <div class="form-group">
                                                 <label class="form-control-label"> Description
                                                     : </label>
                                                 <input class="form-control" type="text" name="description"
-                                                       th:value="${biere.getType().getDescription()}"
+                                                       th:value="*{biere.getType().getDescription()}"
                                                        readonly>
                                             </div>
                                             <div class="form-group">
                                                 <label class="form-control-label"> Fermentation </label>
                                                 <input class="form-control" type="text" name="fermentation"
-                                                       th:value="${biere.getType().getFermentation()}"
+                                                       th:value="*{biere.getType().getFermentation()}"
                                                        readonly>
                                             </div>
                                             <div class="form-group">
                                                 <label class="form-control-label"> Commentaire : </label>
                                                 <input class="form-control" name="commentaire"
-                                                       th:value="${biere.getType().getCommentaire()} != null ? ${biere.getType().getCommentaire()} : 'Pas de commentaire'"
+                                                       th:value="*{biere.getType().getCommentaire()} != null ? *{biere.getType().getCommentaire()} : 'Pas de commentaire'"
                                                        readonly>
 
                                             </div>

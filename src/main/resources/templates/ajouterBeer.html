@@ -30,7 +30,7 @@
             <div class="container-fluid px-4">
                 <h1 class="mt-4">Brasserie</h1>
                 <ol class="breadcrumb mb-4">
-                    <li class="breadcrumb-item"><a th:href="@{/static}">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a th:href="@{/index}">Dashboard</a></li>
                     <li class="breadcrumb-item active">Ajouter une bière</li>
                 </ol>
                 <div class="card mb-4">
@@ -47,15 +47,16 @@
                             <div class="col-10">
                                 <form class=""
                                       method="post" enctype="application/x-www-form-urlencoded"
-                                      th:action="@{/add-beer}" th:object="${biere}">
+                                      th:action="@{/valid-beer}" th:object="${biere}">
                                     <input type="text" th:value="${update}" name="update" hidden>
+                                    <div class="alert alert-danger" role="alert" th:if="${msg}" th:text="${msg}">
+                                    </div>
                                     <div class="form-group row mb-2">
                                         <label for="marque" class="col-sm-2 col-form-label">Marque</label>
                                         <div class="col-sm-10">
                                             <select class="form-select" aria-label="Default select example" id="marque"
                                                     name="marque" required>
-                                                <option selected>Marque</option>
-                                                <option th:field="${marque}" th:each="marque : ${listeMarque}"
+                                                <option th:field="*{marque}" th:each="marque : ${listMarque}"
                                                         th:value="${marque.getNomMarque()}"
                                                         th:text="${marque.getNomMarque()}"></option>
                                             </select>
@@ -64,7 +65,7 @@
                                     <div class="form-group row mb-2">
                                         <label for="version" class="col-sm-2 col-form-label">Version</label>
                                         <div class="col-sm-10">
-                                            <input type="text" th:field="${version}" class="form-control" id="version"
+                                            <input type="text" th:field="*{version}" class="form-control" id="version"
                                                    name="version" placeholder="Version" required>
                                         </div>
                                     </div>
@@ -73,8 +74,7 @@
                                         <div class="col-sm-10">
                                             <select class="form-select" aria-label="Default select example" id="type"
                                                     name="type" required>
-                                                <option selected>Types</option>
-                                                <option th:field="${type}" th:each="type : ${listeType}"
+                                                <option th:field="*{type}" th:each="type : ${listType}"
                                                         th:value="${type.getNoTypeStr()}"
                                                         th:text="${type.getNomType()}"></option>
                                             </select>
@@ -83,7 +83,7 @@
                                     <div class="form-group row mb-2">
                                         <label for="couleur" class="col-sm-2 col-form-label">Couleur de la bière</label>
                                         <div class="col-sm-10">
-                                            <input type="text" th:field="${couleurBiere}" class="form-control"
+                                            <input type="text" th:field="*{couleurBiere}" class="form-control"
                                                    id="couleur" name="couleurBiere" placeholder="Couleur de la bière"
                                                    required>
                                         </div>
@@ -92,7 +92,7 @@
                                     <div class="form-group row mb-2">
                                         <label for="taux" class="col-sm-2 col-form-label">Taux d'alcool</label>
                                         <div class="col-sm-10">
-                                            <input type="text" th:field="${tauxAlcool}" class="form-control" id="taux"
+                                            <input type="text" th:field="*{tauxAlcool}" class="form-control" id="taux"
                                                    name="tauxAlccol" placeholder="Taux d'alcool" required>
                                         </div>
                                     </div>
@@ -101,7 +101,7 @@
                                         <label for="caracteristiques"
                                                class="col-sm-2 col-form-label">Caractéristiques</label>
                                         <div class="col-sm-10">
-                                            <input type="text" th:field="${caracteristiques}" class="form-control"
+                                            <input type="text" th:field="*{caracteristiques}" class="form-control"
                                                    id="caracteristiques" name="caracteristiques"
                                                    placeholder="caracteristiques" required>
                                         </div>

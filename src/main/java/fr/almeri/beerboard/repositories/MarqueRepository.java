@@ -15,6 +15,6 @@ public interface MarqueRepository extends CrudRepository<Marque, String> {
     @Query("SELECT marque FROM Marque marque WHERE marque.brasserie.codeBrasserie = :code")
     public ArrayList<Marque> getListeMarqueByBrasserie(@Param("code") String code);
 
-    @Query("SELECT marque FROM Marque marque ORDER BY marque.nomMarque ASC")
-    public ArrayList<Marque> getListeMarque();
+    @Query("SELECT marque.nomMarque FROM Marque marque ORDER BY marque.nomMarque ASC")
+    public ArrayList<String> getListeMarque();
 }

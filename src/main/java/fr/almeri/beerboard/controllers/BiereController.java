@@ -45,7 +45,7 @@ public class BiereController {
     }
 
 
-    @GetMapping("/see-beer/{code}")
+    @GetMapping("/see-beer/{marque}/{version}")
     public String detailBiere(Model model, @PathVariable String marque, @PathVariable String version, HttpSession session) {
         BiereId idBiere = new BiereId(new Marque(marque), version);
         Biere biere = biereRepository.findById(idBiere).orElseThrow();
@@ -58,25 +58,35 @@ public class BiereController {
     }
 
     @GetMapping("/ajouterBeer")
-    public String ajouterBiereForm(Model model, @PathVariable (required = false) String marque , @PathVariable (required = false) String version, HttpSession session) {
+    public String ajouterBiereForm(Model model, HttpSession session) {
 
-        if (marque == null && version == null) {
-            model.addAttribute("update",false);
-            ArrayList<Marque> listMarque = (ArrayList<Marque>) marqueRepository.findAll();
-            model.addAttribute("listMarque", listMarque);
-            ArrayList<Type> listType = (ArrayList<Type>) typeRepository.findAll();
-            model.addAttribute("listType", listType);
-            if (session.getAttribute("infoConnexion") != null) {
-                return "ajouterBeer";
-            }
-        } else {
-            model.addAttribute("update",true);
-            BiereId idBiere = new BiereId(new Marque(marque), version);
-            model.addAttribute("biere", biereRepository.findById(idBiere).orElseThrow());
-            if (session.getAttribute("infoConnexion") != null) {
-                return "ajouterBeer";
-            }
+        ArrayList<Marque> listMarque = (ArrayList<Marque>) marqueRepository.findAll();
+        model.addAttribute("listMarque", listMarque);
+        ArrayList<Type> listType = (ArrayList<Type>) typeRepository.findAll();
+        model.addAttribute("listType", listType);
+        model.addAttribute("update", false);
+        model.addAttribute("biere", new Biere());
+        if (session.getAttribute("infoConnexion") != null) {
+            return "ajouterBeer";
         }
+        return "redirect:/";
+    }
+
+    @GetMapping("/ajouterBeer/{marque}/{version}")
+    public String ajouterBiereForm(Model model, @PathVariable(required = false) String marque, @PathVariable(required = false) String version, HttpSession session) {
+
+        ArrayList<Marque> listMarque = (ArrayList<Marque>) marqueRepository.findAll();
+        model.addAttribute("listMarque", listMarque);
+        ArrayList<Type> listType = (ArrayList<Type>) typeRepository.findAll();
+        model.addAttribute("listType", listType);
+
+        model.addAttribute("update", true);
+        BiereId idBiere = new BiereId(new Marque(marque), version);
+        model.addAttribute("biere", biereRepository.findById(idBiere).orElseThrow());
+        if (session.getAttribute("infoConnexion") != null) {
+            return "ajouterBeer";
+        }
+
         return "redirect:/";
     }
 
@@ -94,9 +104,9 @@ public class BiereController {
                     return "redirect:/ajouterBeer";
                 }
             }
-        } else{
+        } else {
             biereRepository.save(biere);
-            return "redirect:/";
+            return "redirect:/beers";
         }
         return "redirect:/";
     }
@@ -110,8 +120,8 @@ public class BiereController {
         return "redirect:/";
     }
 
-    @GetMapping("/delete-beer")
-    public String getFicheBiereSuppression(Model pModel, HttpSession session, @RequestParam(required = true) String marque, @RequestParam(required = true) String version) {
+    @GetMapping("/delete-beer/{marque}/{version}")
+    public String getFicheBiereSuppression(Model pModel, HttpSession session, @PathVariable(required = true) String marque, @PathVariable(required = true) String version) {
         BiereId biereId = new BiereId(new Marque(marque), version);
         pModel.addAttribute("biere", biereRepository.findById(biereId).orElseThrow());
         if (session.getAttribute("infoConnexion") != null) {

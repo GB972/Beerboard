@@ -26,6 +26,6 @@ public interface BiereRepository extends CrudRepository<Biere, BiereId> {
     public ArrayList<Biere> getListeVersionByMarque(@Param("code") String code);
 
 
-    @Query(" select b.marque.nomMarque,b.version from Biere b where b.marque.brasserie.codeBrasserie = :code ")
+    @Query(" select b from Biere b where b.marque.brasserie.codeBrasserie = :code ")
     public ArrayList<Biere> getListeMarquesVersions(@Param("code") String code);
 }

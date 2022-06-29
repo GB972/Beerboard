@@ -46,6 +46,8 @@
                     <h3>Liste des Brasseries</h3>
                     <br>
                     <br></br>
+                    <div class="alert alert-danger" role="alert" th:if="${msg}" th:text="${msg}">
+                    </div>
                     <!-- On affiche la liste des pays dans un tableau -->
                     <div class="card mb-4">
                         <div class="card-header">

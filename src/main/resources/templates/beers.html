@@ -30,7 +30,7 @@
             <div class="container-fluid px-4">
                 <h1 class="mt-4">Bières</h1>
                 <ol class="breadcrumb mb-4">
-                    <li class="breadcrumb-item"><a th:href="@{/static}">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a th:href="@{/index}">Dashboard</a></li>
                     <li class="breadcrumb-item active">Liste bières</li>
                 </ol>
                 <div class="card mb-4">
@@ -71,7 +71,7 @@
                                     <a th:href="@{/ajouterBeer/{marque}/{version}(marque=${biere.marque.getNomMarque()},version=${biere.getVersion()})}"><i class="fa-solid fa-pen-to-square"></i></a>
                                 </td>
                                 <td>
-                                    <a th:href="@{/drop-beer/{marque}/{version}(marque=${biere.marque.getNomMarque()},version=${biere.getVersion()})}"><i class="fas fa-trash-alt"></i></i></a>
+                                    <a th:href="@{/delete-beer/{marque}/{version}(marque=${biere.marque.getNomMarque()},version=${biere.getVersion()})}"><i class="fas fa-trash-alt"></i></i></a>
                                 </td>
                             </tr>
                             </tbody>

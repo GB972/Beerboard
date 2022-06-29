@@ -62,7 +62,7 @@ public class Marque implements Serializable {
     @Override
     public String toString() {
         return "Marque{" +
-                "nomMarique='" + this.getNomMarque() + '\'' +
+                "nomMarque='" + this.getNomMarque() + '\'' +
                 ", brasserie=" + this.getBrasserie() +
                 '}';
     }
