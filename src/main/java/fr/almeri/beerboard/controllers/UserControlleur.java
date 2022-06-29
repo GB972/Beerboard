@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import javax.servlet.http.HttpSession;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
@@ -51,5 +52,6 @@ public class UserControlleur {
         String newPass = hashMD5withSalt(user.getPassword(),u.getSalt());
         return newPass.equals(u.getPassword());
     }
+
 
 }

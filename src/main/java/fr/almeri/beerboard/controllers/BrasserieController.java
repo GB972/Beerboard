@@ -61,14 +61,14 @@ public class BrasserieController {
 
         if (session.getAttribute("infoConnexion") != null) {
 
-            return "see-brewery";
+            return "brewery";
         }
 
-        return "brasserie/detail";
+        return "redirect:/";
 
     }
 
-    @GetMapping("/add-brewery")
+    @GetMapping("/ajouterBrewery")
     public String ajouterBrasserieForm(Model pModel, HttpSession session)
     {
         ArrayList<Region> ListRegion = (ArrayList<Region>) regionRepository.findAll();
@@ -86,7 +86,7 @@ public class BrasserieController {
         model.addAttribute("brasserie", brasserieRepository.findById(code));
         model.addAttribute("listeRegion", regionRepository.getListeNomRegionObjAsc());
 
-        return "brasserie/ajouter";
+        return "redirect:/";
     }
 
     @PostMapping("/valid-brewery")

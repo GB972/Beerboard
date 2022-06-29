@@ -45,7 +45,7 @@ public class BiereController {
     }
 
 
-    @GetMapping("/beer")
+    @GetMapping("/see-beer/{code}")
     public String detailBiere(Model model, @PathVariable String marque, @PathVariable String version, HttpSession session) {
         BiereId idBiere = new BiereId(new Marque(marque), version);
         Biere biere = biereRepository.findById(idBiere).orElseThrow();
@@ -56,7 +56,6 @@ public class BiereController {
         return "redirect:/";
 
     }
-
 
     @GetMapping("/ajouterBeer")
     public String ajouterBiereForm(Model model, @PathVariable (required = false) String marque , @PathVariable (required = false) String version, HttpSession session) {
@@ -92,7 +91,7 @@ public class BiereController {
                     return "redirect:/beers";
                 } else {
                     redir.addFlashAttribute("msg", "Une bière de cette marque avec cette version existe déjà, veuillez saisir une nouvelle version.");
-                    return "redirect:/add-beer";
+                    return "redirect:/ajouterBeer";
                 }
             }
         } else{
@@ -116,7 +115,7 @@ public class BiereController {
         BiereId biereId = new BiereId(new Marque(marque), version);
         pModel.addAttribute("biere", biereRepository.findById(biereId).orElseThrow());
         if (session.getAttribute("infoConnexion") != null) {
-            return "delete-beer";
+            return "supprimerBeer";
         }
         return "redirect:/";
     }

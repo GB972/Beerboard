@@ -47,14 +47,14 @@
                                             <label for="email" class="col-4">
                                                 Email
                                             </label>
-                                            <input disabled id="email" class="col-8" th:value="${session.user.login}">
+                                            <input disabled id="email" class="col-8" th:value="${session.infoConnexion.getLogin()}">
                                         </div>
                                         <div class="row input-form">
                                             <label for="pass" class="col-4">
                                                 Mot de passe
                                             </label>
                                             <input disabled id="pass" type="password" class="col-8"
-                                                   th:value="${session.password}">
+                                                   th:value="${session.infoConnexion.getPassword()}">
                                         </div>
                                     </div>
                                 </div>

@@ -47,11 +47,12 @@
                                 <form class=""
                                       method="post" enctype="application/x-www-form-urlencoded"
                                       th:action="@{/add-brewery}" th:object="${brasserie}">
+                                    <input type="text" th:value="${update}" name="update" hidden>
                                     <div class="form-group row mb-2">
                                         <label for="indentifiant" class="col-sm-2 col-form-label">Identifiant de la
                                             brasserie</label>
                                         <div class="col-sm-10">
-                                            <input type="text" th:field="*{codeBrasserie}" class="form-control"
+                                            <input type="text" th:field="${codeBrasserie}" class="form-control"
                                                    id="indentifiant" name="codeBrasserie" placeholder="Identifiant"
                                                    required>
                                         </div>
@@ -60,7 +61,7 @@
                                         <label for="nomBrasserie" class="col-sm-2 col-form-label">Nom de la
                                             brasserie</label>
                                         <div class="col-sm-10">
-                                            <input type="text" th:field="*{nomBrasserie}" class="form-control"
+                                            <input type="text" th:field="${nomBrasserie}" class="form-control"
                                                    id="nomBrasserie" name="nomBrasserie"
                                                    placeholder="Nom de la brasserie" required>
                                         </div>
@@ -68,7 +69,7 @@
                                     <div class="form-group row mb-2">
                                         <label for="VilleBrasserie" class="col-sm-2 col-form-label">Ville</label>
                                         <div class="col-sm-10">
-                                            <input type="text" th:field="*{ville}" class="form-control"
+                                            <input type="text" th:field="${ville}" class="form-control"
                                                    id="VilleBrasserie" name="ville" placeholder="Ville de la brasserie"
                                                    required>
                                         </div>
@@ -79,7 +80,7 @@
                                             <select class="form-select" aria-label="Default select example" id="region"
                                                     name="region" required>
                                                 <option selected>Région</option>
-                                                <option th:field="*{region}" th:each="region : ${listeRegion}"
+                                                <option th:field="${region}" th:each="region : ${listeRegion}"
                                                         th:value="${region.getNomRegion()}"
                                                         th:text="${region.getNomRegion()}"></option>
                                             </select>
